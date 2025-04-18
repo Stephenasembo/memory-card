@@ -80,6 +80,14 @@ async function fetchCardImages() {
   return updatedCharacters;
 }
 
+// Fisher-Yates algorithm implementation
+function shuffleCards(array) {
+  for (let i = array.length - 1; i > 0; i-= 1) {
+    const random = Math.floor(Math.random() * (i + 1));
+    [array[i], array[random]] = [array[random], array[i]];
+  }
+}
+
 function App() {
   const [imagesAvailable, setImagesAvailable] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
@@ -103,6 +111,7 @@ function App() {
   function earnPoint(card) {
     setCurrentScore(currentScore + 1);
     setClickedCards(clickedCards.add(card));
+    shuffleCards(characters);
   }
 
   function gameOver() {
