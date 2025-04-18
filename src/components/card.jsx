@@ -16,6 +16,14 @@ export default function Card({
     incrementScore(btnId);
   }
 
+  // Fisher-Yates algorithm implementation
+  function shuffleCards(array) {
+    for (let i = array.length - 1; i > 0; i-= 1) {
+      const random = Math.floor(Math.random() * (i + 1));
+      [array[i], array[random]] = [array[random], array[i]];
+    }
+  }
+
   // if (!imagesAvailable) {
   //   return (
   //     <div>
