@@ -1,4 +1,21 @@
-export default function Card({characters, imagesAvailable}) {
+export default function Card({
+    characters,
+    imagesAvailable,
+    clickedCards,
+    incrementScore,
+    endGame,
+  }) {
+  
+  function handleClick(e) {
+    const btnId = e.currentTarget.id;
+    console.log(clickedCards);
+    if (clickedCards.has(btnId)) {
+      endGame();
+      return;
+    }
+    incrementScore(btnId);
+  }
+
   if (!imagesAvailable) {
     return (
       <div>
@@ -6,13 +23,17 @@ export default function Card({characters, imagesAvailable}) {
       </div>
     )
   }
+
   return (
     <div className="cards">
       {characters.map((character) => {
         return (
-          <button 
+          <button
           className="characterBtn"
-          key={character.id}>
+          id={character.id}
+          key={character.id}
+          onClick={(e) => handleClick(e)}
+          >
             <div className="characterImage">
               <img src={character.imageUrl} />
             </div>

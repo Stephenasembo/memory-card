@@ -84,7 +84,9 @@ function App() {
   const [imagesAvailable, setImagesAvailable] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [clickedCards, setClickedCards] = useState([]);
+  const [clickedCards, setClickedCards] = useState(new Set());
+
+  console.log(clickedCards)
 
   useEffect(() => {
     (async () => {
@@ -95,15 +97,15 @@ function App() {
 
   function earnPoint(card) {
     setCurrentScore(currentScore + 1);
-    setClickedCards(clickedCards.push(card));
+    setClickedCards(clickedCards.add(card));
   }
 
   function gameOver() {
     if (currentScore > bestScore) {
       setBestScore(currentScore);
-      setCurrentScore(currentScore);
-      setClickedCards([]);
     }
+    setCurrentScore(0);
+    setClickedCards(new Set());
   }
   
   return (
