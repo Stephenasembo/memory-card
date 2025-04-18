@@ -16,13 +16,13 @@ export default function Card({
     incrementScore(btnId);
   }
 
-  // if (!imagesAvailable) {
-  //   return (
-  //     <div>
-  //       Please wait a moment. Card images are loading.
-  //     </div>
-  //   )
-  // }
+  if (!imagesAvailable) {
+    return (
+      <div>
+        Please wait a moment. Card images are loading.
+      </div>
+    )
+  }
 
   return (
     <div className="cards">

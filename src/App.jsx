@@ -96,12 +96,12 @@ function App() {
 
   console.log(clickedCards)
 
-  // useEffect(() => {
-  //   (async () => {
-  //     characters = await fetchCardImages();
-  //     setImagesAvailable(true);
-  //   })()
-  // }, [])
+  useEffect(() => {
+    (async () => {
+      characters = await fetchCardImages();
+      setImagesAvailable(true);
+    })()
+  }, [])
 
   if (currentScore === 12) {
     alert('Game Won');
