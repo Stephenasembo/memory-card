@@ -88,12 +88,12 @@ function App() {
 
   console.log(clickedCards)
 
-  useEffect(() => {
-    (async () => {
-      characters = await fetchCardImages();
-      setImagesAvailable(true);
-    })()
-  }, [])
+  // useEffect(() => {
+  //   (async () => {
+  //     characters = await fetchCardImages();
+  //     setImagesAvailable(true);
+  //   })()
+  // }, [])
 
   function earnPoint(card) {
     setCurrentScore(currentScore + 1);
