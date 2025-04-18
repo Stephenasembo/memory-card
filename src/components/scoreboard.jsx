@@ -1,11 +1,11 @@
-export default function Scoreboard() {
+export default function Scoreboard({current, best}) {
   return (
     <div className="scoreboard">
       <p className="currentScore">
-        Current Score: 0
+        Current Score: {current}
       </p>
       <p className="bestScore">
-        Best Score: 0
+        Best Score: {best}
       </p>
     </div>
   )
