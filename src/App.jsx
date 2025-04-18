@@ -82,12 +82,30 @@ async function fetchCardImages() {
 
 function App() {
   const [imagesAvailable, setImagesAvailable] = useState(false);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+  const [clickedCards, setClickedCards] = useState([]);
+
   useEffect(() => {
     (async () => {
       characters = await fetchCardImages();
       setImagesAvailable(true);
     })()
   }, [])
+
+  function earnPoint(card) {
+    setCurrentScore(currentScore + 1);
+    setClickedCards(clickedCards.push(card));
+  }
+
+  function gameOver() {
+    if (currentScore > bestScore) {
+      setBestScore(currentScore);
+      setCurrentScore(currentScore);
+      setClickedCards([]);
+    }
+  }
+  
   return (
     <div>
       <h1>Bleach Anime Memory Game</h1>
@@ -95,9 +113,18 @@ function App() {
         <div className='information'>
           <p>Click on a card once to earn points</p>
         </div>
-        <Scoreboard />
+        <Scoreboard
+        current={currentScore}
+        best={bestScore}
+        />
       </div>
-      <Card characters={characters} imagesAvailable={imagesAvailable}/>
+      <Card
+      characters={characters}
+      imagesAvailable={imagesAvailable}
+      clickedCards={clickedCards}
+      incrementScore={earnPoint}
+      endGame={gameOver}
+      />
     </div>
   )
 }
