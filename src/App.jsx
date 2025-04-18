@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import './App.css'
+import Card from './components/card';
 
 // These characters will have a name and image
 const characters = [
@@ -78,7 +79,9 @@ function App() {
     })();
   }, []);
   return (
-    <div></div>
+    <div>
+      <Card characters={characters}/>
+    </div>
   )
 }
 
