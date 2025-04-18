@@ -95,6 +95,11 @@ function App() {
   //   })()
   // }, [])
 
+  if (currentScore === 12) {
+    alert('Game Won');
+    gameOver();
+  }
+  
   function earnPoint(card) {
     setCurrentScore(currentScore + 1);
     setClickedCards(clickedCards.add(card));
