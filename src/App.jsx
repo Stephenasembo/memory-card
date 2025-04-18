@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import './App.css'
 import Card from './components/card';
+import Scoreboard from './components/scoreboard';
 
 // These characters will have a name and image
 const characters = [
@@ -80,6 +81,13 @@ function App() {
   }, []);
   return (
     <div>
+      <h1>Bleach Anime Memory Game</h1>
+      <div className='scoreInformation'>
+        <div className='information'>
+          <p>Click on a card once to earn points</p>
+        </div>
+        <Scoreboard />
+      </div>
       <Card characters={characters}/>
     </div>
   )
