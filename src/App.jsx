@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import {useEffect, useState } from 'react';
 import './App.css'
 import Card from './components/card';
 import Scoreboard from './components/scoreboard';
 
 // These characters will have a name and image
-const characters = [
+let characters = [
   {
     name: 'Ichigo Kurosaki',
     id: 0,
@@ -55,9 +55,9 @@ const characters = [
   },
 ]
 
-async function fetchGifs() {
-  const apiKey = '7uCiKGp7r7hEKsspvlhqflcCvrQHKFis';
-  const queryUrl = `https://api.giphy.com/v1/gifs/translate?api_key=${apiKey}&s=cats`;
+async function fetchGifs(query) {
+  const apiKey = 'hJAwUiVPmY6gsPlslo61a7HySbG0mDTA';
+  const queryUrl = `https://api.giphy.com/v1/gifs/translate?api_key=${apiKey}&s=${query} bleach`;
   try {
     const response = await fetch(queryUrl, {mode: 'cors'});
     if (!response.ok) throw new Error(`Failed to fetch with a wrong status`)
@@ -72,13 +72,22 @@ async function fetchGifs() {
   }
 }
 
+async function fetchCardImages() {
+  const updatedCharacters = await Promise.all(characters.map(async (character) => {
+    character.imageUrl = await fetchGifs(character.name);
+    return character;
+  }))
+  return updatedCharacters;
+}
+
 function App() {
+  const [imagesAvailable, setImagesAvailable] = useState(false);
   useEffect(() => {
     (async () => {
-      let url = await fetchGifs();
-      console.log(url);
-    })();
-  }, []);
+      characters = await fetchCardImages();
+      setImagesAvailable(true);
+    })()
+  }, [])
   return (
     <div>
       <h1>Bleach Anime Memory Game</h1>
@@ -88,7 +97,7 @@ function App() {
         </div>
         <Scoreboard />
       </div>
-      <Card characters={characters}/>
+      <Card characters={characters} imagesAvailable={imagesAvailable}/>
     </div>
   )
 }

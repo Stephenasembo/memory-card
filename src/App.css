@@ -16,3 +16,13 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
 }
+
+.characterBtn > p {
+  margin: 0 auto;
+  width: max-content;
+}
+
+.characterImage > img {
+  width: 100px;
+  height: 100px;
+}
